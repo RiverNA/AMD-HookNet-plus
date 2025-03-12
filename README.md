@@ -1,2 +1,2 @@
-# AMD-HookNet-
+# AMD-HookNet++
 AMD-HookNet++
