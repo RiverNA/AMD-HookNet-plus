@@ -17,7 +17,8 @@ Download the official pretrained [Swin-Transformer](https://github.com/microsoft
 
 ### Inference
 Please refer to [CaFFe](https://github.com/Nora-Go/Calving_Fronts_and_Where_to_Find_Them) which offers a uniform standard postprocessing and analyzing tool for evaluating experimental results.
-Upload an inference for calculating the Hausdorff distance (TODO}
+
+$\texttt{Upload an inference for calculating the Hausdorff distance (TODO)}$
 
 ### License
 Licensed under an MIT license.
