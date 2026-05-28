@@ -188,26 +188,11 @@ def calculate_segmentation_metrics(target_mask_modality, complete_predicted_mask
             list_of_f1_scores.append(
                 f1_score(flattened_complete_target_class_labels, flattened_complete_predicted_mask_class_labels))
 
-    # if model.hparams.target_masks == "zones":
-    #     print_zone_metrics("Precision", list_of_precisions)
-    #     print_zone_metrics("Recall", list_of_recalls)
-    #     print_zone_metrics("F1 Score", list_of_f1_scores)
-    #     print_zone_metrics("IoU", list_of_ious)
-    # else:
-    #     print_front_metric("Precision", list_of_precisions)
-    #     print_front_metric("Recall", list_of_recalls)
-    #     print_front_metric("F1 Score", list_of_f1_scores)
-    #     print_front_metric("IoU", list_of_ious)
-
     print_zone_metrics("Precision", list_of_precisions)
     print_zone_metrics("Recall", list_of_recalls)
     print_zone_metrics("F1 Score", list_of_f1_scores)
     print_zone_metrics("IoU", list_of_ious)
 
-    # print_front_metric("Precision", list_of_precisions)
-    # print_front_metric("Recall", list_of_recalls)
-    # print_front_metric("F1 Score", list_of_f1_scores)
-    # print_front_metric("IoU", list_of_ious)
 
 def mask_prediction_with_bounding_box(post_complete_predicted_mask, file_name, bounding_boxes_directory):
     matching_bounding_box_file = get_matching_out_of_folder(file_name, bounding_boxes_directory)
@@ -585,7 +570,7 @@ def main(mode, patch_test_directory, complete_test_directory, complete_postproce
     complete_predicted_masks = os.listdir(complete_test_directory)
     if mode == "test":
         # directory_of_complete_targets = os.path.join(src, "data_raw", model.hparams.target_masks, 'test')
-        src = '/home/wf/HookNet/Glacier_dataset_update'
+        src = './CaFFe'
         directory_of_complete_targets = os.path.join(src, "data_raw", 'zones', 'test')
     else:
         # directory_of_complete_targets = os.path.join(src, "data_raw", model.hparams.target_masks, 'train')
@@ -643,39 +628,6 @@ if __name__ == "__main__":
     assert hparams.target_masks == "fronts" or hparams.target_masks == "zones", \
         "Please set --target_masks correctly. Either 'fronts' or 'zones'."
 
-    # if hparams.target_masks == "fronts":
-    #     assert os.path.isfile(os.path.join(src, "checkpoints", "fronts_segmentation", "run_" + str(hparams.run_number),
-    #                                        hparams.checkpoint_file)), "Checkpoint file does not exist"
-    #     assert os.path.isfile(
-    #         os.path.join(src, "tb_logs", "fronts_segmentation", "run_" + str(hparams.run_number), "log",
-    #                      "version_" + str(hparams.version_number), "hparams.yaml")), "hparams file does not exist"
-    #
-    #     model = FrontUNet.load_from_checkpoint(
-    #         checkpoint_path=os.path.join(src, "checkpoints", "fronts_segmentation", "run_" + str(hparams.run_number),
-    #                                      hparams.checkpoint_file),
-    #         hparams_file=os.path.join(src, "tb_logs", "fronts_segmentation", "run_" + str(hparams.run_number), "log",
-    #                                   "version_" + str(hparams.version_number), "hparams.yaml"),
-    #         map_location=None
-    #     )
-    #     datamodule = GlacierFrontDataModule(batch_size=model.hparams.batch_size, augmentation=False, parent_dir=".",
-    #                                         bright=0, wrap=0, noise=0, rotate=0, flip=0)
-    # else:
-    #     assert os.path.isfile(os.path.join(src, "checkpoints", "zones_segmentation", "run_" + str(hparams.run_number),
-    #                                        hparams.checkpoint_file)), "Checkpoint file does not exist"
-    #     assert os.path.isfile(
-    #         os.path.join(src, "tb_logs", "zones_segmentation", "run_" + str(hparams.run_number), "log",
-    #                      "version_" + str(hparams.version_number), 'hparams.yaml')), "hparams file does not exist"
-    #
-    #     model = ZonesUNet.load_from_checkpoint(
-    #         checkpoint_path=os.path.join(src, "checkpoints", "zones_segmentation", "run_" + str(hparams.run_number),
-    #                                      hparams.checkpoint_file),
-    #         hparams_file=os.path.join(src, "tb_logs", "zones_segmentation", "run_" + str(hparams.run_number), "log",
-    #                                   "version_" + str(hparams.version_number), 'hparams.yaml'),
-    #         map_location=None
-    #     )
-    #     datamodule = GlacierZonesDataModule(batch_size=model.hparams.batch_size, augmentation=False, parent_dir=".",
-    #                                         bright=0, wrap=0, noise=0, rotate=0, flip=0)
-
     if hparams.mode == "test":
         result_directory_name = "test_results"
     else:
@@ -707,9 +659,6 @@ if __name__ == "__main__":
     if not os.path.exists(visualizations_dir):
         os.makedirs(visualizations_dir)
 
-    # main(hparams.mode, model, datamodule, patch_test_directory, complete_test_directory, complete_postprocessed_test_directory, visualizations_dir)
-
-    # print(complete_test_directory)
     main(hparams.mode, patch_test_directory, complete_test_directory, complete_postprocessed_test_directory, visualizations_dir)
 
     if os.path.exists(patch_test_directory):

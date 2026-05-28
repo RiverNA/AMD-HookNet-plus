@@ -298,7 +298,7 @@ def check_whether_winter_half_year(name):
     split_name = name[:-4].split('_')
     if split_name[0] == "COL" or split_name[0] == "JAC":
         nord_halbkugel = True
-    else:                                                   # Jorum, Maple, Crane, SI, DBE
+    else:                                             
         nord_halbkugel = False
     month = int(split_name[1].split('-')[1])
     if nord_halbkugel:
@@ -483,10 +483,10 @@ def visualizations(complete_postprocessed_test_directory, directory_of_target_fr
         sar_image_rgb = skimage.color.gray2rgb(sar_image)
         sar_image_rgb = np.uint8(sar_image_rgb)
 
-        sar_image_rgb[predicted_front > 0] = [0, 255, 255]                # b, g, r
+        sar_image_rgb[predicted_front > 0] = [0, 255, 255]     
         sar_image_rgb[ground_truth_front > 0] = [255, 51, 51]
         correct_prediction = np.logical_and(predicted_front, ground_truth_front)
-        sar_image_rgb[correct_prediction > 0] = [255, 0, 255]        # [51, 255, 51]   # [0, 153, 0]
+        sar_image_rgb[correct_prediction > 0] = [255, 0, 255]   
 
         # Insert Bounding Box
         matching_bounding_box_file = get_matching_out_of_folder(file_name, bounding_boxes_directory)
