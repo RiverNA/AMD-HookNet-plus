@@ -185,23 +185,23 @@ if __name__ == '__main__':
         print('Valid IoU ratio: {}, {}'.format(valid_iou_ratio, iou))
 
         if load_path:
-            save_mode_path = os.path.join(args.output_dir,
-                                          'AMD_HookNet_plus_epoch{:03d}.pth'.format(epoch_num + epoch + 1))
-            print("save model to {}".format(save_mode_path))
+            save_path = os.path.join(args.output_dir, 'AMD_HookNet_plus_epoch{:03d}.pth'.format(epoch_num + epoch + 1))
+            print("save model to {}".format(save_path))
 
             torch.save({'model_state_dict': model.state_dict(),
                         'optimizer_state_dict': optimizer.state_dict(),
                         'epoch': epoch_num + epoch + 1,
                         'iter_num': iter_num,
-                        }, save_mode_path)
+                        }, save_path)
 
         else:
-            save_mode_path = os.path.join(args.output_dir, 'AMD_HookNet_plus_epoch{:03d}.pth'.format(epoch_num + 1))
-            print("save model to {}".format(save_mode_path))
+            save_path = os.path.join(args.output_dir, 'AMD_HookNet_plus_epoch{:03d}.pth'.format(epoch_num + 1))
+            print("save model to {}".format(save_path))
 
             torch.save({'model_state_dict': model.state_dict(),
                         'optimizer_state_dict': optimizer.state_dict(),
                         'epoch': epoch_num + 1,
                         'iter_num': iter_num,
-                        }, save_mode_path)
+                        }, save_path)
+                        
     print("Training Finished!")
