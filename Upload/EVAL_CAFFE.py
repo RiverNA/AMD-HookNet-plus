@@ -397,7 +397,7 @@ def calculate_front_delineation_metric(post_processed_predicted_masks, directory
     mean = np.mean(list_of_all_front_errors_without_nan)
     std = np.std(list_of_all_front_errors_without_nan)
     print(f"Confidence interval: {confidence_interval}, mean: {mean}, standard deviation: {std}")
-    print('\nMDE: {} \nHD95: {}'.format(mean, sum(HD95) / (
+    print('\nMDE:  {} \nHD95: {}'.format(mean, sum(HD95) / (
                 len(post_processed_predicted_masks) - number_of_images_with_no_predicted_front)))
     return list_of_all_front_errors_without_nan
 
