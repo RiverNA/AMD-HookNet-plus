@@ -109,15 +109,16 @@ def eval_net(model, loader, device):
 
             if model.num_classes >= 2:
                 IOU = torchmetrics.JaccardIndex(task='multiclass', num_classes=model.num_classes, average='none')
-                prd_target = F.log_softmax(masks_pred[1], dim=1)
-                prd_target = torch.argmax(prd_target, dim=1)
-                mask_to_image(prd_target, test_save, suffix)
-                iou = IOU(prd_target.cpu().detach(), true_masks_target.cpu().detach())
+                pred = F.log_softmax(masks_pred[1], dim=1)
+                pred = torch.argmax(pred, dim=1)
+                mask_to_image(pred, test_save, suffix)
+                iou = IOU(pred.cpu().detach(), true_masks_target.cpu().detach())
                 iou_ratio += iou
             else:
                 IOU = torchmetrics.JaccardIndex(task='multiclass', num_classes=model.num_classes + 1, average='none')
                 pred = torch.sigmoid(masks_pred[1])
                 pred = (pred > 0.5).float()
+                mask_to_image(pred, test_save, suffix)
                 iou = IOU(pred.cpu().detach(), true_masks_target.type(torch.int64).cpu().detach())
                 iou_ratio += iou
             pbar.update()
