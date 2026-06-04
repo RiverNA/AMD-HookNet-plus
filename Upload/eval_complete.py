@@ -133,7 +133,7 @@ def eval_net(model, loader, device):
     if not os.path.exists(whole_save):
         os.makedirs(whole_save)
     else:
-        shutil.rmtree(test_save)
+        shutil.rmtree(whole_save)
         os.makedirs(whole_save)
     IOU = torchmetrics.JaccardIndex(task='multiclass', num_classes=model.num_classes, average='none')
     iou_ratio = 0
