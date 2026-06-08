@@ -30,8 +30,8 @@ from torchvision.utils import save_image
 from argparse import ArgumentParser
 from PIL import Image
 from torchvision import transforms
-from CaFFe.data import reconstruct_from_patches_and_binarize
-from CaFFe.data import postprocess_zone_segmenation, postprocess_front_segmenation, extract_front_from_zones
+from CaFFe.data import reconstruct_from_patches_and_binarize, postprocess_zone_segmenation, postprocess_front_segmenation, extract_front_from_zones
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--num_classes', type=int, default=4, help='output channel of network')
