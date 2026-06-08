@@ -94,8 +94,7 @@ class T_Upsample(nn.Module):
         crop_size = int(z.shape[3] - x.shape[3]) / 2
         _, _, h, w = z.shape
         item_cropped = z[:, :, int(crop_size):h - int(crop_size), int(crop_size):w - int(crop_size)]
-        x = torch.cat((x, item_cropped), dim=1)
-        x = self.esca(x)
+        x = self.esca(torch.cat((x, item_cropped), dim=1))
         x = self.up(x)
         x = self.conv(x)
         crop_size = int(y.shape[3] - x.shape[3]) / 2
