@@ -23,6 +23,9 @@ An inference example for calculating the Hausdorff distance, MDE, and IoU using 
 ### License
 Licensed under an MIT license.
 
+### News
+:trophy: We won the Second Place in the ICDAR 2026 AnyScript Competition (Page Retrieval Track).
+
 ### Citation
 If you find this work useful for your research, please cite us:
 ```bibtex
